@@ -1,162 +1,358 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="zh-Hans">
 <head>
-    <title>Wen Keyu</title>
+    <title>Wen Keyu (闻科宇) - Homepage</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript
-      ><link rel="stylesheet" href="assets/css/noscript.css"
-    /></noscript>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Personal homepage of Wen Keyu, Ph.D. student at AMSS, CAS.">
+    <style>
+        /* --- 动画定义 --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 全局基础设定 --- */
+        :root {
+            --primary-color: #003366; /* 深蓝 */
+            --link-color: #0056b3;
+            --text-color: #333;
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --border-color: #eee;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-body);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        a { color: #337ab7; text-decoration: none; transition: all 0.2s; }
+        a:hover { color: var(--primary-color); text-decoration: underline; }
+
+        h1, h2, h3 { color: var(--primary-color); margin-top: 0; }
+        h1 { font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: 0.5px; }
+        /* 章节标题样式优化 */
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            margin-top: 40px;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h3 { font-size: 1.15rem; margin-bottom: 5px; color: #444; font-weight: 600; }
+        p { margin-bottom: 1.2rem; }
+
+        /* --- 核心布局容器 --- */
+        .wrapper {
+            max-width: 1150px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 50px;
+            padding: 50px;
+            background-color: var(--bg-card);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        /* --- 左侧边栏 (Sidebar) --- */
+        .sidebar { text-align: center; }
+        .profile-avatar {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile-avatar:hover { transform: scale(1.02); }
+        .sidebar-info { font-size: 0.95rem; margin-bottom: 25px; color: #555; }
+        .sidebar-info p { margin-bottom: 8px; }
+
+        /* --- CV 分体式胶囊按钮 --- */
+        .cv-group-container {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .cv-group { display: flex; width: 85%; gap: 3px; }
+        .cv-half-btn {
+            flex: 1; display: inline-flex; justify-content: center; align-items: center;
+            padding: 8px 0; border: 2px solid var(--primary-color);
+            color: var(--primary-color); font-weight: 600; font-size: 0.95rem;
+            transition: all 0.2s; background-color: transparent;
+        }
+        .cv-half-btn.left { border-radius: 50px 0 0 50px; border-right-width: 2px; }
+        .cv-half-btn.right { border-radius: 0 50px 50px 0; border-left-width: 2px; }
+        .cv-half-btn:hover {
+            background-color: var(--primary-color); color: #fff;
+            text-decoration: none; box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* --- 导航菜单优化 --- */
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0 0 0;
+            text-align: left;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+        .nav-menu li { margin-bottom: 12px; }
+        .nav-menu a {
+            display: block;
+            color: #555; /* 稍微加深颜色 */
+            font-weight: 600; /* 加粗英文部分 */
+            padding: 6px 0;
+            position: relative;
+            line-height: 1.4;
+        }
+        /* 导航中的中文部分样式 */
+        .nav-cn {
+            font-weight: 400; /* 中文不加粗 */
+            font-size: 0.9em; /* 字体稍小 */
+            color: #888;      /* 颜色稍浅，突出层次 */
+            margin-left: 5px;
+        }
+        .nav-menu a:hover { color: var(--primary-color); padding-left: 8px; }
+        .nav-menu a:hover .nav-cn { color: var(--primary-color); } /* 悬停时中文也变色 */
+        .nav-menu a::before {
+            content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            width: 0; height: 4px; background-color: var(--primary-color); border-radius: 2px; transition: width 0.2s;
+        }
+        .nav-menu a:hover::before { width: 4px; }
+
+        /* --- 右侧主要内容区 --- */
+        .main-content section { scroll-margin-top: 30px; }
+
+        /* 标题中的中文部分样式 */
+        h2 span {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        /* --- Education Experience --- */
+        .edu-item { margin-bottom: 30px; }
+        .edu-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .edu-university { font-size: 1.2rem; color: #2c3e50; font-weight: bold; }
+        .edu-date { color: #888; font-size: 0.9rem; font-family: 'Georgia', serif; }
+        .edu-details { margin-top: 5px; font-style: italic; color: #444; font-size: 1.05rem; }
+        .bilingual-text { display: block; font-style: normal; color: #777; font-size: 0.9rem; margin-top: 4px; }
+
+        .edu-images-container {
+            margin-top: 25px; display: flex; gap: 20px; justify-content: flex-start;
+        }
+        .edu-img-card {
+            flex: 0 0 auto; border-radius: 6px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #f0f0f0; transition: transform 0.2s;
+        }
+        .edu-img-card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+        .edu-img-card img { display: block; height: 110px; width: auto; object-fit: cover; }
+
+        /* --- Research Interests --- */
+        ul.research-list { padding-left: 20px; }
+        ul.research-list li { margin-bottom: 8px; }
+
+        /* --- Publications --- */
+        .pub-list { display: flex; flex-direction: column; gap: 15px; }
+        .pub-row { display: flex; align-items: baseline; font-size: 1rem; color: #333; }
+        .pub-number { min-width: 35px; font-weight: normal; color: #333; }
+        .pub-content { flex: 1; line-height: 1.5; }
+        .pub-content a { color: #0000FF; text-decoration: underline; font-weight: normal; }
+        .pub-venue { font-weight: bold; color: #000; }
+
+        /* --- Gallery --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+        .gallery-item {
+            border-radius: 4px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s; background: #fff; position: relative;
+        }
+        .gallery-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 10; }
+        .gallery-item a { display: block; cursor: zoom-in; width: 100%; height: 100%; }
+        .gallery-img-wrapper { width: 100%; aspect-ratio: 3/4; }
+        .gallery-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-caption {
+            padding: 6px 2px; text-align: center; font-size: 0.75rem; color: #666;
+            background-color: #fafafa; margin: 0; border-top: 1px solid #f0f0f0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .placeholder-item {
+            border: 1px dashed #ccc; box-shadow: none; background: #f9f9f9;
+            display: flex; align-items: center; justify-content: center; aspect-ratio: 3/4;
+        }
+        .placeholder-item:hover { transform: none; box-shadow: none; }
+        .placeholder-text { color: #999; font-size: 0.75rem; text-align: center; line-height: 1.4; }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center; margin-top: 60px; padding-top: 20px;
+            border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #999;
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            .wrapper {
+                margin: 0; border-radius: 0; box-shadow: none;
+                grid-template-columns: 1fr; gap: 30px; padding: 30px 20px;
+            }
+            .sidebar { border-bottom: 1px solid var(--border-color); padding-bottom: 30px; }
+            .nav-menu { text-align: center; border-top: none; margin-top: 20px; }
+            .nav-menu li { display: inline-block; margin: 0 8px; }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .edu-images-container { justify-content: center; }
+        }
+    </style>
 </head>
-<body class="is-preload">
-    <div id="wrapper" class="fade-in">
+<body>
 
-      <div id="intro">
-        <h1>
-          This is<br />
-          Wen Keyu (闻科宇)
-        </h1>
-        <p>Hello! This is my personal homepage.</p>
-        <p>欢迎来到我的个人主页！</p>
-      </div>
+    <div class="wrapper">
 
-      <div id="table-of-contents" style="margin-top: 0em; margin-bottom: 1.5em; padding: 8px 0;">
-        <ul style="list-style-type: none; padding-left: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; align-items: center;">
-          <li style="margin: 5px 12px; white-space: nowrap;"><a href="#about-me" style="text-decoration: none; color: #E0E0E0; font-weight: normal; font-size: 0.9em; transition: color 0.3s ease;">About Me | 关于我</a></li>
-          <li style="margin: 5px 12px; white-space: nowrap;"><a href="#education" style="text-decoration: none; color: #E0E0E0; font-weight: normal; font-size: 0.9em; transition: color 0.3s ease;">Education Experience | 教育经历</a></li>
-          <li style="margin: 5px 12px; white-space: nowrap;"><a href="#research" style="text-decoration: none; color: #E0E0E0; font-weight: normal; font-size: 0.9em; transition: color 0.3s ease;">Research Interests | 研究兴趣</a></li>
-          <li style="margin: 5px 12px; white-space: nowrap;"><a href="#remarks" style="text-decoration: none; color: #E0E0E0; font-weight: normal; font-size: 0.9em; transition: color 0.3s ease;">Something to Say | 后话</a></li>
-          <li style="margin: 5px 12px; white-space: nowrap;"><a href="#photographs" style="text-decoration: none; color: #E0E0E0; font-weight: normal; font-size: 0.9em; transition: color 0.3s ease;">Some Photographs | 一些照片</a></li>
-        </ul>
-      </div>
+        <aside class="sidebar">
+            <img src="images/personal_image/person1.jpg" alt="Wen Keyu" class="profile-avatar">
+            <h1>Wen Keyu<br><span style="font-size: 0.8em; font-weight: normal; color: #555;">(闻科宇)</span></h1>
 
-      <div id="main">
-        <img class="image right" src="images/personal_image/person1.jpg" style="max-width: 32%; height: auto; border-radius: 4px; margin-bottom: 0.5em;" alt="" />
-        <h2 id="about-me">Wen Keyu (闻科宇)</h2>
-        <p>
-          Email: <a href="mailto:wenky115@163.com">wenky115@163.com</a><br />
-          <br />
-          I am currently a second-year Ph.D. student in Operations Research (Combinatorial Optimization) at AMSS, CAS. In my spare time, I enjoy playing table tennis, photography, cycling and traveling. <br />
-          我目前是中国科学院数学与系统科学研究院运筹学专业（组合优化）的二年级博士研究生，在闲暇之余喜欢打乒乓球、摄影、骑行和出游。<br />
-          <br />
-          Currently, I am quite interested in various fields such as combinatorial optimization, deep learning, and quantitative investment. If anyone shares the same interest, feel free to contact me via email.<br />
-          目前，我对组合优化、深度学习以及量化投资等诸多领域都比较感兴趣，如果有同样感兴趣的朋友，欢迎通过邮件联系我。
-        </p>
+            <div class="sidebar-info">
+                <p>Ph.D. Student in Operations Research<br>AMSS, CAS</p>
+                <p>Email: <a href="mailto:wenky115@163.com">wenky115@163.com</a></p>
 
-        <img class="image left" src="images/personal_image/ZJU.jpg" style="max-width: 45%; height: auto; border-radius: 4px; margin-bottom: 0.5em;" alt="" />
-        <h3 id="education">Education Experience | 教育经历</h3>
-        <p>
-          Ph.D. in Operations Research and Cybernetics, Academy of Mathematics and Systems Science, CAS, 2024.09-2029.06(expected).<br />
-          <a href="http://www.amss.ac.cn" target="_blank">中国科学院数学与系统科学研究院</a>, 理学博士, 运筹学与控制论, 2024.09-2029.06(预期).<br />
-          <br />
-          B.S. in Mathematics and Applied Mathematics, Zhejiang University, 2020.09-2024.06.<br />
-          <a href="https://www.zju.edu.cn" target="_blank">浙江大学</a>, 理学学士, 数学与应用数学, 2020.09-2024.06
-        </p>
+                <div class="cv-group-container">
+                    <div class="cv-group">
+                        <a href="pdf/file/CV_KeyuWen.pdf" target="_blank" class="cv-half-btn left">CV</a>
+                        <a href="pdf/file/CV_闻科宇.pdf" target="_blank" class="cv-half-btn right">简历</a>
+                    </div>
+                </div>
+            </div>
 
-        <img class="image right" src="images/personal_image/scenery1.jpg" style="max-width: 45%; height: auto; border-radius: 4px; margin-bottom: 0.5em;" alt="" />
-        <h3 id="research">Research Interests | 研究兴趣</h3>
-        <ul>
-          <li><strong>Combinatorial Optimization (组合优化)</strong>
-            <ul>
-              <li>Game Theory; (博弈论)</li>
-              <li>Approximation Algorithm Design; (近似算法设计)</li>
+            <ul class="nav-menu">
+                <li><a href="#about-me">About Me <span class="nav-cn">| 关于我</span></a></li>
+                <li><a href="#education">Education <span class="nav-cn">| 教育经历</span></a></li>
+                <li><a href="#research">Research Interests <span class="nav-cn">| 研究兴趣</span></a></li>
+<!--                <li><a href="#publications">Publications <span class="nav-cn">| 发表论文</span></a></li>-->
+                <li><a href="#remarks">Remarks <span class="nav-cn">| 后话</span></a></li>
+                <li><a href="#photographs">Photographs <span class="nav-cn">| 摄影作品</span></a></li>
             </ul>
-          </li>
-          <li><strong>Optimization Algorithm (最优化算法)</strong></li>
-          <li><strong>Quantitative Investment (量化投资)</strong></li>
-        </ul>
-        <p>
-          View my full
-          <a href="pdf/file/CV_KeyuWen.pdf" target="'blank">Curriculum vitae</a>.
-          (Updated in July, 2025)<br />
-          更多信息参见<a href="pdf/file/CV_闻科宇.pdf" target="_blank">简历</a>. (更新于 07, 2025)
-        </p>
+        </aside>
 
-        <img class="image left" src="images/personal_image/UCAS.jpg" style="max-width: 45%; height: auto; border-radius: 4px; margin-bottom: 0.5em;" alt="" />
-        <h3 id="remarks">Something to Say | 后话</h3>
-        <p>
-          Recently, I have been studying some topics in deep learning (such as CS224N) and combinatorial optimization (such as game theory, optimization algorithms, etc.).<br />
-          近期，我在学习深度学习 (CS224N等) 和组合优化 (博弈论、最优化算法等) 的一些内容。
-        </p>
+        <main class="main-content">
 
-        <h3 id="photographs" style="clear:both; margin-top: 2.5em; border-top: 1px solid #eee; padding-top: 2em;">Some Photographs | 一些照片</h3>
-        <div id="image-gallery" style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1em;">
+            <section id="about-me">
+                <h2>About Me <span>| 关于我</span></h2>
+                <p>
+                    I am a second-year Ph.D. student specializing in Operations Research (Combinatorial Optimization) at AMSS, CAS. Beyond research, I am an enthusiast of table tennis, photography, cycling, and traveling.
+                    <span class="bilingual-text">我是中国科学院数学与系统科学研究院运筹学专业（组合优化）的二年级博士研究生。科研之外，我热爱乒乓球、摄影、骑行与旅行。</span>
+                </p>
+                <p>
+                    My academic interests broadly span Combinatorial Optimization, Deep Learning, and Quantitative Investment. I welcome open discussions and potential collaborations—please feel free to reach out via email.
+                    <span class="bilingual-text">我的学术兴趣涵盖组合优化、深度学习及量化投资等领域。欢迎对相关话题感兴趣的朋友通过邮件与我交流探讨。</span>
+                </p>
+            </section>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Beijing.jpg" alt="Beijing" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Beijing</p>
-          </div>
+            <section id="education">
+                <h2>Education <span>| 教育经历</span></h2>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Hangzhou.jpg" alt="Hangzhou" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Hangzhou</p>
-          </div>
+                <div class="edu-item">
+                    <div class="edu-header">
+                        <span class="edu-university">Academy of Mathematics and Systems Science, CAS</span>
+                        <span class="edu-date">2024.09 - 2029.06 (Expected)</span>
+                    </div>
+                    <div class="edu-details">Ph.D. Student in Operations Research and Cybernetics</div>
+                    <span class="bilingual-text"><a href="http://www.amss.ac.cn" target="_blank">中国科学院数学与系统科学研究院</a>，理学博士生，运筹学与控制论</span>
+                </div>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Shenzhen.jpg" alt="Shenzhen" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Shenzhen</p>
-          </div>
+                <div class="edu-item">
+                    <div class="edu-header">
+                        <span class="edu-university">Zhejiang University</span>
+                        <span class="edu-date">2020.09 - 2024.06</span>
+                    </div>
+                    <div class="edu-details">B.S. in Mathematics and Applied Mathematics</div>
+                    <span class="bilingual-text"><a href="https://www.zju.edu.cn" target="_blank">浙江大学</a>，理学学士，数学与应用数学</span>
+                </div>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Tianjin.jpg" alt="Tianjin" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Tianjin</p>
-          </div>
+                <div class="edu-images-container">
+                    <div class="edu-img-card"><img src="images/personal_image/ZJU.jpg" alt="Zhejiang University"></div>
+                    <div class="edu-img-card"><img src="images/personal_image/UCAS.jpg" alt="AMSS/UCAS"></div>
+                </div>
+            </section>
 
+            <section id="research">
+                <h2>Research Interests <span>| 研究兴趣</span></h2>
+                <ul class="research-list">
+                    <li>
+                        <strong>Combinatorial Optimization (组合优化)</strong>
+                        <ul>
+                            <li>Game Theory (博弈论)</li>
+                            <li>Approximation Algorithm Design (近似算法设计)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Optimization Algorithms (最优化算法)</strong></li>
+                    <li><strong>Quantitative Investment (量化投资)</strong></li>
+                </ul>
+            </section>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Tokyo.jpg" alt="Tokyo" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Tokyo</p>
-          </div>
+<!--            <section id="publications">-->
+<!--                <h2>Publications <span>| 发表论文</span></h2>-->
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Yokohama.jpg" alt="Yokohama" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Yokohama</p>
-          </div>
+<!--                <div class="pub-list">-->
+<!--                    <div class="pub-row">-->
+<!--                        <div class="pub-number">[1]</div>-->
+<!--                        <div class="pub-content">-->
+<!--                            Roger B. Myerson, <a href="https://doi.org/10.1287/moor.6.1.58" target="_blank">Optimal Auction Design</a>, <span class="pub-venue">Mathematics of Operations Research</span>, 6(1): 58-73, 1981.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </section>-->
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/MountFuji.jpg" alt="MountFuji" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Mount Fuji</p>
-          </div>
+            <section id="remarks">
+                <h2>Remarks <span>| 后话</span></h2>
+                <p>
+                    Recently, I have been deepening my understanding of Deep Learning (e.g., CS224N) and advanced topics in Combinatorial Optimization (Game Theory, Optimization Algorithms).
+                    <span class="bilingual-text">近期，我正在深入钻研深度学习（如 CS224N 课程）以及组合优化（博弈论、最优化算法等）的相关前沿课题。</span>
+                </p>
+            </section>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Kamakura.jpg" alt="Kamakura" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Kamakura</p>
-          </div>
+            <section id="photographs">
+                <h2>Photographs <span>| 摄影作品</span></h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><a href="images/personal_image/city/Beijing.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Beijing.jpg" alt="Beijing" loading="lazy"></div><p class="gallery-caption">Beijing</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Hangzhou.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Hangzhou.jpg" alt="Hangzhou" loading="lazy"></div><p class="gallery-caption">Hangzhou</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Shenzhen.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Shenzhen.jpg" alt="Shenzhen" loading="lazy"></div><p class="gallery-caption">Shenzhen</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Tianjin.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Tianjin.jpg" alt="Tianjin" loading="lazy"></div><p class="gallery-caption">Tianjin</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Tokyo.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Tokyo.jpg" alt="Tokyo" loading="lazy"></div><p class="gallery-caption">Tokyo</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Yokohama.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Yokohama.jpg" alt="Yokohama" loading="lazy"></div><p class="gallery-caption">Yokohama</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/MountFuji.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/MountFuji.jpg" alt="Mount Fuji" loading="lazy"></div><p class="gallery-caption">Mount Fuji</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Kamakura.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Kamakura.jpg" alt="Kamakura" loading="lazy"></div><p class="gallery-caption">Kamakura</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/KualaLumpur.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/KualaLumpur.jpg" alt="Kuala Lumpur" loading="lazy"></div><p class="gallery-caption">Kuala Lumpur</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Penang.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Penang.jpg" alt="Penang" loading="lazy"></div><p class="gallery-caption">Penang</p></a></div>
+                    <div class="gallery-item"><a href="images/personal_image/city/Jeju.jpg" target="_blank"><div class="gallery-img-wrapper"><img src="images/personal_image/city/Jeju.jpg" alt="Jeju" loading="lazy"></div><p class="gallery-caption">Jeju</p></a></div>
 
+                    <div class="gallery-item placeholder-item">
+                        <div class="placeholder-text">Coming<br>Soon...</div>
+                    </div>
+                </div>
+            </section>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/KualaLumpur.jpg" alt="KualaLumpur" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Kuala Lumpur</p>
-          </div>
+            <div class="footer">
+                <p>Last updated: Feb., 2026</p>
+            </div>
 
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Penang.jpg" alt="Penang" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Penang</p>
-          </div>
-
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/personal_image/city/Jeju.jpg" alt="Jeju" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-            <p style="font-size: 0.9em; color: #555;">Jeju</p>
-          </div>
-
-          <div class="gallery-item" style="flex-basis: 24%; margin-bottom: 2em; text-align: center;">
-            <img src="images/ComeSoon.png" alt="ComeSoon" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 0.5em;">
-</div>
-
-        </div>
-        <p style="text-align:right; margin-top: 3em;">Updated in July, 2025</p>
-      </div>
+        </main>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+
+</body>
 </html>
