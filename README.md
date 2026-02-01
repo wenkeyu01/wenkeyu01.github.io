@@ -1,6 +1,6 @@
-# Wen Keyu (闻科宇) - Academic Homepage
+# Wen Keyu (闻科宇) - Homepage
 
-This repository hosts the source code for the personal academic homepage of **Wen Keyu**, a Ph.D. student specializing in Operations Research at the AMSS, CAS.
+This repository hosts the source code for the homepage of **Wen Keyu**, a Ph.D. student specializing in Operations Research at the AMSS, CAS.
 
 The website is designed to be a clean, professional, and responsive portfolio to showcase academic background, research interests, publications, and personal photography.
 
