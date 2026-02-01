@@ -205,17 +205,66 @@
             border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #999;
         }
 
-        /* --- Mobile --- */
+        /* --- Mobile Optimization (移动端优化) --- */
         @media (max-width: 768px) {
             .wrapper {
-                margin: 0; border-radius: 0; box-shadow: none;
-                grid-template-columns: 1fr; gap: 30px; padding: 30px 20px;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+                grid-template-columns: 1fr; /* 单栏布局 */
+                gap: 30px;
+                padding: 25px 18px; /* 调整内边距，利用更多宽度 */
             }
-            .sidebar { border-bottom: 1px solid var(--border-color); padding-bottom: 30px; }
-            .nav-menu { text-align: center; border-top: none; margin-top: 20px; }
-            .nav-menu li { display: inline-block; margin: 0 8px; }
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-            .edu-images-container { justify-content: center; }
+
+            /* 侧边栏优化：减少留白，缩小头像 */
+            .sidebar {
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 25px;
+            }
+            .profile-avatar {
+                width: 130px; /* 缩小头像以节省手机首屏空间 */
+                height: 130px;
+            }
+            .sidebar h1 { font-size: 1.6rem; }
+
+            /* 导航菜单优化：增大点击区域，自动换行 */
+            .nav-menu {
+                text-align: center;
+                border-top: none;
+                margin-top: 20px;
+            }
+            .nav-menu li {
+                display: inline-block;
+                margin: 5px 8px; /* 增加行间距，防止误触 */
+            }
+
+            /* CV 按钮组优化：手机端拉宽以便点击 */
+            .cv-group { width: 95%; }
+
+            /* 标题优化 */
+            h2 {
+                font-size: 1.4rem;
+                margin-top: 30px;
+            }
+
+            /* 照片墙优化：改为2列 (3列在手机上太拥挤，1列太长) */
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            /* 教育经历图片优化：防止过大 */
+            .edu-images-container {
+                justify-content: center;
+            }
+            .edu-img-card img {
+                height: 80px; /* 手机端稍微调小校徽高度 */
+            }
+
+            /* 论文列表长文本换行处理 */
+            .pub-content {
+                word-break: break-word; /* 防止长链接撑破屏幕 */
+            }
         }
     </style>
 </head>
@@ -243,7 +292,7 @@
                 <li><a href="#about-me">About Me <span class="nav-cn">| 关于我</span></a></li>
                 <li><a href="#education">Education <span class="nav-cn">| 教育经历</span></a></li>
                 <li><a href="#research">Research Interests <span class="nav-cn">| 研究兴趣</span></a></li>
-<!--                <li><a href="#publications">Publications <span class="nav-cn">| 发表论文</span></a></li>-->
+                <li><a href="#publications">Publications <span class="nav-cn">| 发表论文</span></a></li>
                 <li><a href="#remarks">Remarks <span class="nav-cn">| 后话</span></a></li>
                 <li><a href="#photographs">Photographs <span class="nav-cn">| 摄影作品</span></a></li>
             </ul>
@@ -305,18 +354,18 @@
                 </ul>
             </section>
 
-<!--            <section id="publications">-->
-<!--                <h2>Publications <span>| 发表论文</span></h2>-->
+            <section id="publications">
+                <h2>Publications <span>| 发表论文</span></h2>
 
-<!--                <div class="pub-list">-->
-<!--                    <div class="pub-row">-->
-<!--                        <div class="pub-number">[1]</div>-->
-<!--                        <div class="pub-content">-->
-<!--                            Roger B. Myerson, <a href="https://doi.org/10.1287/moor.6.1.58" target="_blank">Optimal Auction Design</a>, <span class="pub-venue">Mathematics of Operations Research</span>, 6(1): 58-73, 1981.-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
+                <div class="pub-list">
+                    <div class="pub-row">
+                        <div class="pub-number">[1]</div>
+                        <div class="pub-content">
+                            Roger B. Myerson, <a href="https://doi.org/10.1287/moor.6.1.58" target="_blank">Optimal Auction Design</a>, <span class="pub-venue">Mathematics of Operations Research</span>, 6(1): 58-73, 1981.
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section id="remarks">
                 <h2>Remarks <span>| 后话</span></h2>
